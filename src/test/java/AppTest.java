@@ -1,5 +1,4 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ll.exam.article.dto.ArticleDto;
 import com.ll.exam.util.Ut;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ public class AppTest {
 //        String jsonStr = om.writeValueAsString(articleDto);
 //        System.out.println(jsonStr);
 
-        String jsonStr = Ut.json.toJsonStr(articleDto, "");
+        String jsonStr = Ut.json.toStr(articleDto, "");
         assertThat(jsonStr).isNotBlank();
         assertThat(jsonStr).isEqualTo("""
                 {"id":1,"title":"제목","body":"내용"}
