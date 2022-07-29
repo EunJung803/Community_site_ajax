@@ -1,4 +1,4 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ll.exam.article.dto.ArticleDto;
 import com.ll.exam.util.Ut;
 import org.junit.jupiter.api.Test;
@@ -12,14 +12,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest {
     @Test
+    void assertJ__assertThat() {
+        int rs = 10 + 20;
+        assertThat(rs).isEqualTo(30);
+    }
+
+    @Test
+    void ObjectMapper__articleDtoToJsonStr() {
+        ArticleDto articleDto = new ArticleDto(1, "제목", "내용");
+
+        String jsonStr = Ut.json.toStr(articleDto, "");
+        assertThat(jsonStr).isNotBlank();
+        assertThat(jsonStr).isEqualTo("""
+                {"id":1,"title":"제목","body":"내용"}
+                """.trim());
+    }
+
+    @Test
     void ObjectMapper__articleDtoListToJsonStr() {
         List<ArticleDto> articleDtos = new ArrayList<>();
-
         articleDtos.add(new ArticleDto(1, "제목1", "내용1"));
         articleDtos.add(new ArticleDto(2, "제목2", "내용2"));
 
         String jsonStr = Ut.json.toStr(articleDtos, "");
-
         assertThat(jsonStr).isEqualTo("""
                 [{"id":1,"title":"제목1","body":"내용1"},{"id":2,"title":"제목2","body":"내용2"}]
                 """.trim());
@@ -37,29 +52,6 @@ public class AppTest {
     }
 
     @Test
-    // assertJ__assertThat
-    void 실험_assertThat() {
-        int rs = 10 + 20;
-        assertThat(rs).isEqualTo(30);
-    }
-
-    @Test
-    // ObjectMapper__objToJsonStr
-    void 실험_ObjectMapper() throws JsonProcessingException {
-        ArticleDto articleDto = new ArticleDto(1, "제목", "내용");
-
-//        ObjectMapper om = new ObjectMapper();
-//        String jsonStr = om.writeValueAsString(articleDto);
-//        System.out.println(jsonStr);
-
-        String jsonStr = Ut.json.toStr(articleDto, "");
-        assertThat(jsonStr).isNotBlank();
-        assertThat(jsonStr).isEqualTo("""
-                {"id":1,"title":"제목","body":"내용"}
-                """.trim());
-    }
-
-    @Test
     void ObjectMapper__jsonStrToObj() {
         ArticleDto articleDtoOrigin = new ArticleDto(1, "제목", "내용");
         String jsonStr = Ut.json.toStr(articleDtoOrigin, "");
@@ -67,5 +59,19 @@ public class AppTest {
         ArticleDto articleDtoFromJson = Ut.json.toObj(jsonStr, ArticleDto.class, null);
 
         assertThat(articleDtoOrigin).isEqualTo(articleDtoFromJson);
+    }
+
+    @Test
+    void ObjectMapper__jsonStrToArticleDtoList() {
+        List<ArticleDto> articleDtos = new ArrayList<>();
+        articleDtos.add(new ArticleDto(1, "제목1", "내용1"));
+        articleDtos.add(new ArticleDto(2, "제목2", "내용2"));
+
+        String jsonStr = Ut.json.toStr(articleDtos, "");
+
+        List<ArticleDto> articleDtosFromJson = Ut.json.toObj(jsonStr, new TypeReference<>() {
+        }, null);
+
+        assertThat(articleDtosFromJson).isEqualTo(articleDtos);
     }
 }
