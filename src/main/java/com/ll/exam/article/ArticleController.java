@@ -135,13 +135,7 @@ public class ArticleController {
 
         // jsp가 필요없다 -> json 형태로만 출력하면 되기 때문
 
-        Map<String, Object> resultData = new LinkedHashMap<String, Object>();
-
-        // HashMap에는 순서를 보장하지 않음 (순서X) -> 이렇게 넣으면 msg가 위에 뜨고 아래에 resultCode가 뜬다
-        // LinkedHashMap은 순서를 보장해준다
-        resultData.put("resultCode", "S-1");    // S == success 의미
-        resultData.put("msg", "성공");
-        resultData.put("data", articleDtos);
+        Map<String, Object> resultData = Ut.mapOf("resultCode", "S-1", "msg", "성공", "data", articleDtos);
 
         rq.json(resultData);
     }

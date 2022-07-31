@@ -93,4 +93,12 @@ public class AppTest {
 
         assertThat(articleDtoMapFromJson).isEqualTo(articleDtoMap);
     }
+
+    @Test
+    void mapOf() {
+        Map<String , Object> map = Ut.mapOf("age", 23, "name", "EJ");
+
+        assertThat(map.get("age")).isEqualTo(23);
+        assertThat(map.get("name")).isEqualTo("EJ");
+    }
 }
