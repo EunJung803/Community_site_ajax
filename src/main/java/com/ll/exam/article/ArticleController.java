@@ -4,7 +4,10 @@ import com.ll.exam.Rq;
 import com.ll.exam.article.dto.ArticleDto;
 import com.ll.exam.util.Ut;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArticleController {
     private ArticleService articleService;
@@ -132,6 +135,14 @@ public class ArticleController {
 
         // jsp가 필요없다 -> json 형태로만 출력하면 되기 때문
 
-        rq.json(articleDtos);
+        Map<String, Object> resultData = new LinkedHashMap<String, Object>();
+
+        // HashMap에는 순서를 보장하지 않음 (순서X) -> 이렇게 넣으면 msg가 위에 뜨고 아래에 resultCOde가 뜬다
+        // LinkedHashMap은 순서를 보장해준다
+        resultData.put("resultCode", "S-1");    // S == success 의미
+        resultData.put("msg", "성공");
+        resultData.put("data", articleDtos);
+
+        rq.json(resultData);
     }
 }
