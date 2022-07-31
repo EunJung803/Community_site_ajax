@@ -132,7 +132,18 @@ public class ArticleController {
     }
 
     public void getArticles(Rq rq) {
-        List<ArticleDto> articleDtos = articleService.findAll();
+//        List<ArticleDto> articleDtos = articleService.findAll();
+
+        long fromId = rq.getLongParam("fromId", -1);
+
+        List<ArticleDto> articleDtos = null;
+
+        if ( fromId == -1 ) {
+            articleDtos = articleService.findAll();
+        }
+        else {
+            articleDtos = articleService.findIdGreaterThan(fromId);
+        }
 
 //        ResultData resultData = new ResultData("성공", "S-1", articleDtos);
 //        rq.json(resultData);
