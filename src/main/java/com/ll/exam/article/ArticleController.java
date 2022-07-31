@@ -137,7 +137,7 @@ public class ArticleController {
 
         Map<String, Object> resultData = new LinkedHashMap<String, Object>();
 
-        // HashMap에는 순서를 보장하지 않음 (순서X) -> 이렇게 넣으면 msg가 위에 뜨고 아래에 resultCOde가 뜬다
+        // HashMap에는 순서를 보장하지 않음 (순서X) -> 이렇게 넣으면 msg가 위에 뜨고 아래에 resultCode가 뜬다
         // LinkedHashMap은 순서를 보장해준다
         resultData.put("resultCode", "S-1");    // S == success 의미
         resultData.put("msg", "성공");
