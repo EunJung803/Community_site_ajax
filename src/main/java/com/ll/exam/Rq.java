@@ -1,5 +1,8 @@
 package com.ll.exam;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ll.exam.article.dto.ArticleDto;
+import com.ll.exam.util.Ut;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public class Rq {
     private final HttpServletRequest req;
@@ -151,5 +155,13 @@ public class Rq {
                 history.back();
                 </script>
                 """);
+    }
+
+    public void json(Object data) {     // 뭐든지 받아야 하므로 Object 형태의 인자를 가짐
+        resp.setContentType("application/json; charset=utf-8");
+        // json 데이터를 줄 때는 서버가 위와 같이 알려주기로 약속이 되어있다. (Content type을 json이라고 알려주기)
+
+        String jsonStr = Ut.json.toStr(data, "");
+        println(jsonStr);
     }
 }

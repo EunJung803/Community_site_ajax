@@ -132,7 +132,6 @@ public class ArticleController {
 
         // jsp가 필요없다 -> json 형태로만 출력하면 되기 때문
 
-        String jsonStr = Ut.json.toStr(articleDtos, "");
-        rq.println(jsonStr);
+        rq.json(articleDtos);
     }
 }
