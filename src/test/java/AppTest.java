@@ -71,6 +71,7 @@ public class AppTest {
 
         List<ArticleDto> articleDtosFromJson = Ut.json.toObj(jsonStr, new TypeReference<>() {
         }, null);
+        // array 형태의 json으로 부터 List<ArticleDto> 타입의 객체 얻기
 
         assertThat(articleDtosFromJson).isEqualTo(articleDtos);
     }
