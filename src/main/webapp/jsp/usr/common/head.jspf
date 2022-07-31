@@ -40,14 +40,16 @@ html > body {
 
 <header>
     <div class="container py-3 px-3 mx-auto flex">
-        <a href="/usr/article/list/free" class="mr-auto">로고</a>
+        <a href="/usr/article/list/free" class="mr-auto">
+            <img src="https://cdn-icons-png.flaticon.com/512/1274/1274223.png" class="w-24 h-24">
+        </a>
 
         <ul class="flex gap-3">
             <li>
-                <a class="hover:underline hover:text-[red]" href="/usr/article/write/free">자유게시물 작성</a>
+                <a class="hover:underline hover:text-blue-500" href="/usr/article/write/free">자유게시물 작성</a>
             </li>
             <li>
-                <a class="hover:underline hover:text-[red]" href="/usr/article/list/free">자유게시물 리스트</a>
+                <a class="hover:underline hover:text-blue-500" href="/usr/article/list/free">자유게시물 리스트</a>
             </li>
         </ul>
     </div>
