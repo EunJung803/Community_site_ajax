@@ -157,11 +157,23 @@ public class Rq {
                 """);
     }
 
-    public void json(Object data) {     // 뭐든지 받아야 하므로 Object 형태의 인자를 가짐
+    public void json(Object resultData) {     // 뭐든지 받아야 하므로 Object 형태의 인자를 가짐
         resp.setContentType("application/json; charset=utf-8");
         // json 데이터를 줄 때는 서버가 위와 같이 알려주기로 약속이 되어있다. (Content type을 json이라고 알려주기)
 
-        String jsonStr = Ut.json.toStr(data, "");
+        String jsonStr = Ut.json.toStr(resultData, "");
         println(jsonStr);
+    }
+
+    public void json(Object data, String resultCode, String msg) {
+        json(new ResultData(resultCode, msg, data));
+    }
+
+    public void successJson(Object data) {
+        json(data, "S-1", "성공");
+    }
+
+    public void failJson(Object data) {
+        json(data, "F-1", "실패");
     }
 }
