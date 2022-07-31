@@ -1,5 +1,6 @@
 package com.ll.exam.article;
 
+import com.ll.exam.ResultData;
 import com.ll.exam.Rq;
 import com.ll.exam.article.dto.ArticleDto;
 import com.ll.exam.util.Ut;
@@ -133,9 +134,7 @@ public class ArticleController {
     public void getArticles(Rq rq) {
         List<ArticleDto> articleDtos = articleService.findAll();
 
-        // jsp가 필요없다 -> json 형태로만 출력하면 되기 때문
-
-        Map<String, Object> resultData = Ut.mapOf("resultCode", "S-1", "msg", "성공", "data", articleDtos);
+        ResultData<List<ArticleDto>> resultData = new ResultData("성공", "S-1", articleDtos);
 
         rq.json(resultData);
     }
